@@ -27,6 +27,9 @@ SOFTWARE. -->
     <title>БисЧан — уникальный мессенджер для фандома Бискаса</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="БисЧан — уникальный мессенджер для фандома Бискаса. Проект находится в активной разработке.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <!-- 页面样式 -->
     <style>
@@ -39,86 +42,143 @@ SOFTWARE. -->
 
         /* 页面背景与主字体 */
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
+            font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at 15% 20%, rgba(56, 189, 248, 0.18), transparent 35%),
+                        radial-gradient(circle at 80% 0%, rgba(168, 85, 247, 0.2), transparent 28%),
+                        linear-gradient(135deg, #020617, #0f172a 45%, #020617);
             color: #e5e7eb;
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            padding: 32px 16px;
+            padding: 40px 18px;
         }
 
         /* 主容器 */
         .page {
             width: 100%;
-            max-width: 860px;
+            max-width: 960px;
             background: rgba(15, 23, 42, 0.9);
-            border-radius: 24px;
-            border: 1px solid rgba(148, 163, 184, 0.25);
-            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
-            padding: 28px;
+            border-radius: 28px;
+            border: 1px solid rgba(148, 163, 184, 0.28);
+            box-shadow: 0 24px 65px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            padding: 32px;
+            backdrop-filter: blur(10px);
         }
 
         /* 大屏幕下的 padding 调整 */
         @media (min-width: 640px) {
             .page {
-                padding: 36px 40px;
+                padding: 42px 48px;
             }
         }
 
         /* 主标题样式 */
         h1 {
-            font-size: clamp(1.9rem, 2.2vw, 2.4rem);
+            font-size: clamp(2rem, 2.6vw, 2.6rem);
             font-weight: 800;
-            letter-spacing: 0.03em;
-            margin-bottom: 8px;
+            letter-spacing: 0.02em;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         /* 左侧绿色小圆点 */
         h1 span.logo-dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 999px;
-            background: #22c55e;
-            box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
+            background: linear-gradient(135deg, #22c55e, #4ade80);
+            box-shadow: 0 0 14px rgba(34, 197, 94, 0.95);
         }
 
         /* 多彩渐变标题 */
         h1 span.accent {
-            background: linear-gradient(135deg, #38bdf8, #a855f7, #f97316);
+            background: linear-gradient(120deg, #38bdf8, #a855f7, #f97316);
             -webkit-background-clip: text;
             color: transparent;
         }
 
         /* 副标题 */
         .subtitle {
-            color: #9ca3af;
-            font-size: 0.98rem;
-            margin-bottom: 18px;
+            color: #cbd5e1;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
         /* 项目状态提示标签 */
         .status {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(251, 191, 36, 0.12);
+            gap: 10px;
+            background: linear-gradient(90deg, rgba(34, 197, 94, 0.2), rgba(251, 191, 36, 0.12));
             border-radius: 999px;
-            padding: 6px 12px 6px 8px;
-            color: #fbbf24;
-            font-size: 0.9rem;
-            margin-bottom: 24px;
+            padding: 8px 14px 8px 10px;
+            color: #f8fafc;
+            font-size: 0.92rem;
+            margin-bottom: 12px;
+            border: 1px solid rgba(74, 222, 128, 0.35);
         }
 
         .status-dot {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 999px;
             background: #facc15;
-            box-shadow: 0 0 12px rgba(250, 204, 21, 0.85);
+            box-shadow: 0 0 12px rgba(250, 204, 21, 0.9);
+        }
+
+        /* Дата выпуска */
+        .release {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(120deg, rgba(59, 130, 246, 0.2), rgba(236, 72, 153, 0.2));
+            border: 1px solid rgba(94, 234, 212, 0.5);
+            color: #e0f2fe;
+            border-radius: 14px;
+            padding: 10px 14px;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        /* CTA buttons */
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            margin: 16px 0 20px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(120deg, #38bdf8, #a855f7);
+            color: #0b1120;
+            box-shadow: 0 12px 25px rgba(168, 85, 247, 0.35);
+        }
+
+        .btn-secondary {
+            background: rgba(148, 163, 184, 0.14);
+            color: #e2e8f0;
+            border-color: rgba(148, 163, 184, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
         }
 
         /* 发布日期 */
@@ -133,7 +193,7 @@ SOFTWARE. -->
         .grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 18px;
+            gap: 20px;
         }
 
         /* 宽屏：两列布局 */
@@ -145,24 +205,41 @@ SOFTWARE. -->
 
         /* 卡片样式 */
         .card {
-            background: rgba(15, 23, 42, 0.85);
-            border-radius: 18px;
+            background: rgba(17, 24, 39, 0.9);
+            border-radius: 20px;
             border: 1px solid rgba(148, 163, 184, 0.25);
-            padding: 18px 18px 16px;
+            padding: 20px 20px 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.12), transparent 40%);
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .card > * {
+            position: relative;
+            z-index: 1;
         }
 
         .card + .card {
-            margin-top: 10px;
+            margin-top: 12px;
         }
 
         /* 卡片标题 */
         .card-title {
-            font-size: 1.05rem;
+            font-size: 1.08rem;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
+            color: #f1f5f9;
         }
 
         /* 标签 / 特性 */
@@ -170,50 +247,51 @@ SOFTWARE. -->
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            background: rgba(15, 118, 110, 0.25);
+            background: rgba(15, 118, 110, 0.35);
             border-radius: 999px;
-            padding: 4px 10px;
-            font-size: 0.78rem;
+            padding: 6px 12px;
+            font-size: 0.82rem;
             color: #a5f3fc;
-            margin-right: 6px;
-            margin-bottom: 6px;
+            margin-right: 8px;
+            margin-bottom: 8px;
         }
 
         /* 右边团队列表 */
         .team-list {
             list-style: none;
-            margin-top: 6px;
+            margin-top: 8px;
         }
 
         .team-list li {
-            padding: 6px 0;
-            font-size: 0.96rem;
+            padding: 8px 0;
+            font-size: 0.98rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 8px;
+            gap: 10px;
         }
 
         /* 底部版权 */
         footer {
-            margin-top: 26px;
-            font-size: 0.8rem;
-            color: #6b7280;
+            margin-top: 32px;
+            font-size: 0.82rem;
+            color: #94a3b8;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px;
         }
 
         /* 顶部 Logo 图片样式 */
         .logo {
             display: block;
-            width: 120px; /* 固定大小 */
+            width: 128px; /* 固定大小 */
             height: auto;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             margin-left: auto;
             margin-right: auto;
-            border-radius: 12px;
+            border-radius: 16px;
+            box-shadow: 0 10px 28px rgba(56, 189, 248, 0.28);
         }
 
     </style>
@@ -238,10 +316,18 @@ SOFTWARE. -->
             фандома и всех желающих.
         </p>
 
-        <!-- 项目开发状态 -->
-        <div class="status">
-            <span class="status-dot"></span>
-            <span>Проект в активной разработке</span>
+        <div class="cta-row">
+            <!-- 项目开发状态 -->
+            <div class="status">
+                <span class="status-dot"></span>
+                <span>Проект в активной разработке</span>
+            </div>
+            <div class="release">🚀 Дата выпуска запланирована на 23 февраля</div>
+        </div>
+
+        <div class="cta-row">
+            <a class="btn btn-primary" href="#">Попробовать демо</a>
+            <a class="btn btn-secondary" href="#">Следить за обновлениями</a>
         </div>
 
         <div class="publish-date">Дата публикации: 23 февраля 2026</div>
