@@ -1,378 +1,84 @@
-<!-- MIT License
-
-Copyright (c) 2025 БисЧан-Команда
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. -->
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>БисЧан — уникальный мессенджер для фандома Бискаса</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="БисЧан — уникальный мессенджер для фандома Бискаса. Проект находится в активной разработке.">
-
-    <!-- 页面样式 -->
-    <style>
-        /* 全局样式、去除默认间距 */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* 页面背景与主字体 */
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
-            color: #e5e7eb;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            padding: 32px 16px;
-        }
-
-        /* 主容器 */
-        .page {
-            width: 100%;
-            max-width: 860px;
-            background: rgba(15, 23, 42, 0.9);
-            border-radius: 24px;
-            border: 1px solid rgba(148, 163, 184, 0.25);
-            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
-            padding: 28px;
-        }
-
-        /* 大屏幕下的 padding 调整 */
-        @media (min-width: 640px) {
-            .page {
-                padding: 36px 40px;
-            }
-        }
-
-        /* 主标题样式 */
-        h1 {
-            font-size: clamp(1.9rem, 2.2vw, 2.4rem);
-            font-weight: 800;
-            letter-spacing: 0.03em;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* 左侧绿色小圆点 */
-        h1 span.logo-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 999px;
-            background: #22c55e;
-            box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
-        }
-
-        /* 多彩渐变标题 */
-        h1 span.accent {
-            background: linear-gradient(135deg, #38bdf8, #a855f7, #f97316);
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-
-        /* 副标题 */
-        .subtitle {
-            color: #9ca3af;
-            font-size: 0.98rem;
-            margin-bottom: 18px;
-        }
-
-        /* 项目状态提示标签 */
-        .status {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(251, 191, 36, 0.12);
-            border-radius: 999px;
-            padding: 6px 12px 6px 8px;
-            color: #fbbf24;
-            font-size: 0.9rem;
-            margin-bottom: 24px;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 999px;
-            background: #facc15;
-            box-shadow: 0 0 12px rgba(250, 204, 21, 0.85);
-        }
-
-        /* 发布日期 */
-        .publish-date {
-            font-size: 0.9rem;
-            color: #cbd5f5;
-            margin-top: -12px;
-            margin-bottom: 22px;
-        }
-
-        /* 主布局：左侧内容 + 右侧侧栏 */
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 18px;
-        }
-
-        /* 宽屏：两列布局 */
-        @media (min-width: 900px) {
-            .grid {
-                grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-            }
-        }
-
-        /* 卡片样式 */
-        .card {
-            background: rgba(15, 23, 42, 0.85);
-            border-radius: 18px;
-            border: 1px solid rgba(148, 163, 184, 0.25);
-            padding: 18px 18px 16px;
-        }
-
-        .card + .card {
-            margin-top: 10px;
-        }
-
-        /* 卡片标题 */
-        .card-title {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* 标签 / 特性 */
-        .tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: rgba(15, 118, 110, 0.25);
-            border-radius: 999px;
-            padding: 4px 10px;
-            font-size: 0.78rem;
-            color: #a5f3fc;
-            margin-right: 6px;
-            margin-bottom: 6px;
-        }
-
-        /* 右边团队列表 */
-        .team-list {
-            list-style: none;
-            margin-top: 6px;
-        }
-
-        .team-list li {
-            padding: 6px 0;
-            font-size: 0.96rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-        }
-
-        /* 底部版权 */
-        footer {
-            margin-top: 26px;
-            font-size: 0.8rem;
-            color: #6b7280;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        /* 顶部 Logo 图片样式 */
-        .logo {
-            display: block;
-            width: 120px; /* 固定大小 */
-            height: auto;
-            margin-bottom: 16px;
-            margin-left: auto;
-            margin-right: auto;
-            border-radius: 12px;
-        }
-
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>БисЧан - уютные личные чаты</title>
+  <meta name="description" content="БисЧан - лёгкие личные чаты для команды и друзей. Быстрый обмен сообщениями, статусы онлайн и приватные диалоги без лишнего шума.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<div class="page">
-    <header>
-        <!-- 项目 Logo -->
-        <img class="logo" src="https://ttwicsur.github.io/img/logo-BisChan.png" alt="Логотип БисЧан">
-
-        <!-- 主标题区 -->
-        <h1>
-            <span class="logo-dot"></span>
-            <span class="accent">БисЧан</span>
-            <span>— мессенджер фандома Бискаса</span>
-        </h1>
-
-        <!-- 副标题介绍 -->
-        <p class="subtitle">
-            Экспериментальный мессенджер, который вырос из шутки и превратился в настоящий проект для общения
-            фандома и всех желающих.
-        </p>
-
-        <!-- 项目开发状态 -->
-        <div class="status">
-            <span class="status-dot"></span>
-            <span>Проект в активной разработке</span>
+  <div class="page">
+    <header class="page-header">
+      <div class="brand">
+        <img src="https://ttwicsur.github.io/img/logo-BisChan.png" class="logo tiny" alt="БисЧан">
+        <div>
+          <div class="title">БисЧан</div>
+          <div class="subtitle">Уютные личные разговоры без лишнего шума.</div>
         </div>
-
-        <div class="publish-date">Дата публикации: 23 февраля 2026</div>
+      </div>
     </header>
 
-    <main class="grid">
-        <!-- 左侧主要内容 -->
-        <section>
-            <!-- 卡片：项目起源 -->
-            <div class="card">
-                <div class="card-title">
-                    <span class="icon">❓</span>
-                    <span>Как появился БисЧан</span>
-                </div>
-                <p>
-                    Изначально БисЧан был обычной шуточкой...
-                </p>
-                <p class="dev-note">
-                    <!-- 开发者注释 -->
-                    Сейчас мы тестируем архитектуру...
-                </p>
-            </div>
+    <section class="hero glass">
+      <span class="pill">Свежий взгляд на личные чаты</span>
+      <h1>БисЧан держит разговоры в тонусе и фокусе</h1>
+      <p class="muted">Никаких лишних вкладок: только списки диалогов, быстрые ответы и понятные статусы.</p>
+      <div class="hero-actions">
+        <a href="/" class="link">Начать общение</a>
+        <a href="/admin" class="link">Управлять пользователями</a>
+      </div>
+      <div class="hero-grid">
+        <div class="chip">Мгновенные сообщения</div>
+        <div class="chip">Онлайн-статусы</div>
+        <div class="chip">Приватные диалоги</div>
+        <div class="chip">Лёгкая настройка</div>
+      </div>
+    </section>
 
-            <!-- 卡片：Что такое БисЧан -->
-            <div class="card">
-                <div class="card-title">
-                    <span class="icon">💬</span>
-                    <span>Что такое БисЧан</span>
-                </div>
-                <p>
-                    БисЧан — это уникальный мессенджер...
-                </p>
+    <section class="feature-grid">
+      <div class="info-card">
+        <h3>Простой вход</h3>
+        <p class="muted">Регистрация без лишних шагов: ник, пароль, и вы уже в разговоре.</p>
+      </div>
+      <div class="info-card">
+        <h3>Чистая лента</h3>
+        <p class="muted">Диалог всегда перед глазами, важные сообщения не теряются.</p>
+      </div>
+    </section>
 
-                <p class="section-title">Ключевые идеи</p>
-                <div style="margin-top: 6px;">
-                    <!-- 标签组 -->
-                    <span class="tag">фандом Бискаса</span>
-                    <span class="tag">уютные чаты</span>
-                    <span class="tag">экспериментальный проект</span>
-                </div>
-            </div>
+    <section class="info-card" style="margin-top:24px;">
+      <h3>Почему БисЧан</h3>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-icon">01</div>
+          <div>
+            <strong>Скорость</strong>
+            <div class="muted">WebSocket отвечает мгновенно, без обновления страниц.</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">02</div>
+          <div>
+            <strong>Защита</strong>
+            <div class="muted">Токены и шифрование паролей для приватных разговоров.</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">03</div>
+          <div>
+            <strong>Фокус</strong>
+            <div class="muted">Никакого лишнего, только полезные функции.</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <!-- 卡片：Преимущества и планы -->
-            <div class="card">
-                <div class="card-title">
-                    <span class="icon">⭐</span>
-                    <span>Преимущества и планы</span>
-                </div>
-
-                <ul class="feature-list">
-                    <li class="feature-item">
-                        <span class="feature-icon">🔐</span>
-                        <div class="feature-text">
-                            <span>Шифрование данных</span><br>
-                            <!-- 功能说明：隐私与加密 -->
-                            Безопасность общения...
-                        </div>
-                    </li>
-
-                    <li class="feature-item">
-                        <span class="feature-icon">🔑</span>
-                        <div class="feature-text">
-                            <span>Уникальные ключи</span><br>
-                            <!-- 功能说明：访问权限 -->
-                            Доступ через ключи...
-                        </div>
-                    </li>
-
-                    <li class="feature-item">
-                        <span class="feature-icon">💰</span>
-                        <div class="feature-text">
-                            <span>Монетизация</span><br>
-                            <!-- 功能说明：未来付费功能 -->
-                            Платные функции...
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- 右侧栏 -->
-        <aside>
-            <!-- 卡片：团队 -->
-            <div class="card">
-                <div class="card-title">
-                    <span class="icon">👑</span>
-                    <span>Команда БисЧана</span>
-                </div>
-                <ul class="team-list">
-                    <li>
-                        <span class="team-name">Георгий</span>
-                        <span class="team-role">владелец. главный программист</span>
-                    </li>
-                    <li>
-                        <span class="team-name">Блеки</span>
-                        <span class="team-role">мемный чел</span>
-                    </li>
-                    <li>
-                        <span class="team-name">Болгарка</span>
-                        <span class="team-role">мемный чел</span>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- 卡片：社交媒体 -->
-            <div class="card">
-                <div class="card-title">
-                    <span class="icon">🌐</span>
-                    <span>Наши соцсети</span>
-                </div>
-
-                <p class="links">
-                    <!-- Pinterest 链接 -->
-                    Pinterest:
-                    <a href="https://pin.it/5uAwS1AX0" target="_blank" rel="noopener noreferrer">
-                        https://pin.it/5uAwS1AX0
-                    </a>
-                </p>
-
-                <p class="dev-note">
-                    <!-- 未来计划说明 -->
-                    В будущем здесь появятся и другие площадки...
-                </p>
-            </div>
-        </aside>
-    </main>
-
-    <!-- 页脚 -->
-    <footer>
-        <span>© 2025 БисЧан-команда. Проект фандома Бискаса.</span>
+    <footer class="footer">
+      <span>© 2025 БисЧан. Все права защищены.</span>
     </footer>
-</div>
+  </div>
 </body>
 </html>
